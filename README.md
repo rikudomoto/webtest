@@ -1,21 +1,39 @@
 # テーブル設計
 
-## users テーブル
+## Helper_users テーブル
 
-| Column                     | Type    | Options     |
-| -------------------------- | ------- | ----------- |
-| name                       | string  | null: false |
-| email                      | string  | null: false |
-| password                   | string  | null: false |
-| Helper_or_Team operator_id | integer | null: false |
-| position                   | string  |             |
-| Experience history         | integer |             |
-| appeal                     | string  |             |
-| Team introduction          | string  |             |
+| Column             | Type    | Options     |
+| ------------------ | ------- | ----------- |
+| name               | string  | null: false |
+| email              | string  | null: false |
+| password           | string  | null: false |
+| area               | integer |             |
+| position           | string  |             |
+| Experience_history | integer |             |
+| appeal             | string  |             |
 
 ### Association
 -
 -
 -
 
-## 
+## operator_users テーブル
+
+| Column            | Type   | Options     |
+| ----------------- | ------ | ----------- |
+| Team_name         | string | null: false |
+| email             | string | null: false |
+| password          | string | null: false |
+| area              | string |             |
+| Team_introduction | string |             |
+
+### Association
+-
+-
+-
+
+## Postテーブル
+
+| Column | Type | Options |
+| ------ | ---- | ------- |
+|        |      |         |
