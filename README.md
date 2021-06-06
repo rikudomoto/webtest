@@ -1,39 +1,81 @@
 # テーブル設計
 
-## Helper_users テーブル
+## users テーブル
+
+| Column          | Type    | Options        |
+| --------------- | ------- | -------------- |
+| nickname        | string  | null: false    |
+| email           | string  | null: false    |
+| password        | string  | null: false    |
+| birthday        | date    |                |
+| baseball_career | integer |                |
+| appeal          | text    |                |
+| is_manager      | boolean | default: false |
+
+### Association
+- has_many: posts
+- has_one: team
+- has_many :room_users
+- has_many :rooms, through: room_users
+- has_many :messages
+
+## teams テーブル
 
 | Column             | Type    | Options     |
 | ------------------ | ------- | ----------- |
-| name               | string  | null: false |
-| email              | string  | null: false |
-| password           | string  | null: false |
-| area               | integer |             |
-| position           | string  |             |
-| Experience_history | integer |             |
-| appeal             | string  |             |
+| team_name          | string  | null: false |
+| prefecture_code_id | integer | null: false |
+| city               | string  |             |
+| team_introduction  | text    |             |
 
 ### Association
--
--
--
+- belongs_to: user
 
-## operator_users テーブル
+## postsテーブル
 
-| Column            | Type   | Options     |
-| ----------------- | ------ | ----------- |
-| Team_name         | string | null: false |
-| email             | string | null: false |
-| password          | string | null: false |
-| area              | string |             |
-| Team_introduction | string |             |
+| Column        | Type    | Options     |
+| ------------- | ------- | ----------- |
+| match_date    | date    | null: false |
+| place         | string  | null: false |
+| recruit_count | integer | null: false |
+| content       | text    | null: false |
 
 ### Association
--
--
--
+- belongs_to: user
 
-## Postテーブル
+## rooms テーブル
 
-| Column | Type | Options |
-| ------ | ---- | ------- |
-|        |      |         |
+| Column | Type   | Options     |
+| ------ | ------ | ----------- |
+| name   | string | null: false |
+
+### Association
+
+- has_many :room_users
+- has_many :users, through: room_users
+- has_many :messages
+
+## room_users テーブル
+
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| user   | references | null: false, foreign_key: true |
+| room   | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :room
+- belongs_to :user
+
+## messages テーブル
+
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| content | string     |                                |
+| user    | references | null: false, foreign_key: true |
+| room    | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :room
+- belongs_to :user
